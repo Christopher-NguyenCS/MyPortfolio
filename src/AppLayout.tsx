@@ -1,14 +1,17 @@
 import { Outlet } from "react-router";
 import Header from "./components/Header";
+import { ThemeProvider } from "./components/theme-provider";
 
 function AppLayout() {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center items-center">
-				<Header />
-				<Outlet />
-			</div>
+			<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+				<div className="flex flex-col justify-center items-center">
+					<Header />
+					<Outlet />
+				</div>
+			</ThemeProvider>
 		</>
 
 	)

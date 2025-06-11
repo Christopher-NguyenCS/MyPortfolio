@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function NavigationTab() {
 	return (
-		<nav className="bg-gray-800 text-white flex space-x-4">
+		<nav className="dark:text-white flex space-x-4">
 			<Link
 				to="/"
 				className="py-5"
