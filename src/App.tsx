@@ -1,3 +1,4 @@
+import Animal from "./Animal"
 
 
 
@@ -6,8 +7,8 @@ function App() {
 
 	return (
 		<>
-			<div>
-				Hello, my name is Christopher Nguyen and I am an aspiring full stack developer!
+			<div className="flex justify-center items-center">
+				<Animal />
 			</div>
 		</>
 	)
