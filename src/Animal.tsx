@@ -95,7 +95,7 @@ function Animal() {
 	return (
 
 		<>
-			<div className='flex justify-center items-start sm:w-2xs md:w-xl lg:w-2xl xl:w-3xl 2xl:w-4xl' ref={refContainer}>
+			<div className='flex justify-center items-start w-2xs md:w-xl lg:w-2xl xl:w-3xl 2xl:w-4xl' ref={refContainer}>
 
 			</div>
 		</>
