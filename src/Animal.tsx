@@ -24,12 +24,14 @@ function Animal() {
 		const scene = new THREE.Scene();
 		const renderer = new THREE.WebGLRenderer();
 		let camera: THREE.PerspectiveCamera;
+		const container = refContainer.current;
+
 		refRenderer.current = renderer;
-		if (refContainer.current != null) {
-			refContainer.current.appendChild(renderer.domElement);
-			camera = new THREE.PerspectiveCamera(40, refContainer.current.clientWidth / refContainer.current.clientHeight, 0.1, 1000);
+		if (container != null) {
+			container.appendChild(renderer.domElement);
+			camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
 			refCamera.current = camera;
-			renderer.setSize(refContainer.current.clientWidth, refContainer.current.clientHeight);
+			renderer.setSize(container.clientWidth, container.clientHeight);
 		}
 		else {
 			camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -62,8 +64,8 @@ function Animal() {
 
 		return () => {
 			// Remove the canvas element when the component unmounts
-			if (refContainer.current && renderer.domElement.parentNode === refContainer.current) {
-				refContainer.current.removeChild(renderer.domElement);
+			if (container && renderer.domElement.parentNode === container) {
+				container.removeChild(renderer.domElement);
 			}
 		};
 	}, []);
