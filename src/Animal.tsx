@@ -1,48 +1,24 @@
 import * as THREE from "three";
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useElementSize } from "./hooks/useElementSize";
 
-type resizeScene = {
-	'width': number,
-	'height': number
-}
 
 function Animal() {
 	const refContainer = useRef<HTMLDivElement | null>(null);
-	const [clientContainerSize, setClientContainerSize] = useState<resizeScene>({ 'width': 0, 'height': 0 });
 	const refRenderer = useRef<THREE.WebGLRenderer | null>(null);
 	const refCamera = useRef<THREE.PerspectiveCamera | null>(null);
-
-	const handleResize = useCallback(() => {
-		const container = refContainer.current;
-		const renderer = refRenderer.current;
-		if (renderer && container) {
-			if (clientContainerSize.width !== container.clientWidth || clientContainerSize.height !== container.clientHeight) {
-				setClientContainerSize({
-					"width": container.clientWidth,
-					"height": container.clientHeight
-				});
-			}
-		}
-		return;
-	}, []);
-
-	useEffect(() => {
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
-	}, [handleResize]);
+	const {storedElementSize} = useElementSize({elementRef:refContainer});
 
 	useEffect(() => {
 		const camera = refCamera.current;
 		const renderer = refRenderer.current;
-		if (camera !== null && renderer != null && clientContainerSize) {
-			camera.aspect = clientContainerSize.width / clientContainerSize.height;
+		const container = refContainer.current;
+		if (camera !== null && renderer != null && container != null && storedElementSize.width > 0 && storedElementSize.height > 0) {
+			camera.aspect = storedElementSize.width / storedElementSize.height;
 			camera.updateProjectionMatrix();
-			renderer.setSize(clientContainerSize.width, clientContainerSize.height);
+			renderer.setSize(storedElementSize.width, storedElementSize.height);
 		}
-	}, [clientContainerSize])
+	}, [storedElementSize]);
 
 	useEffect(() => {
 		const scene = new THREE.Scene();
