@@ -28,7 +28,7 @@ export default function Header() {
 		<>
 			<header className="flex justify-center items-center space-x-4 dark:text-white w-full p-5" ref={headerRef}>
 				
-						<div className="flex md:flex-row">
+						<div className="flex md:flex-row justify-center items-center">
 							<h1 className="dark:text-white py-5">
 								Christopher Nguyen
 							</h1>
@@ -36,9 +36,9 @@ export default function Header() {
 							{
 								headerStyle ?
 								( 
-									<div className="flex flex-row ml-5">
-										<NavigationTab />
-										<Social />
+									<div className="flex flex-row ml-5 justify-center items-center">
+										<NavigationTab style={headerStyle} />
+										<Social style={headerStyle}/>
 										<ToggleTheme />
 									</div>
 								)
@@ -51,10 +51,10 @@ export default function Header() {
 										</DropdownMenuTrigger>
 											<DropdownMenuContent>
 												<DropdownMenuItem>
-													<NavigationTab />
+													<NavigationTab style={headerStyle}/>
 												</DropdownMenuItem>
 												<DropdownMenuItem>
-													<Social />
+													<Social style = {headerStyle}/>
 												</DropdownMenuItem>
 												<DropdownMenuItem>
 													<ToggleTheme />
